@@ -75,6 +75,7 @@ async function fetchListings({ settings, credentials, probeDir }) {
   for (const query of queries) {
     for (let page = 1; page <= pages; page++) {
       let raw;
+      let status;
       try {
         const res = await request(ENDPOINT, {
           method: 'POST',
@@ -85,19 +86,16 @@ async function fetchListings({ settings, credentials, probeDir }) {
         });
         calls++;
         raw = res.body;
-
-        if (!res.ok) {
-          errors.push(`"${query}" s.${page}: HTTP ${res.status} ${soapFault(raw) || ''}`.trim());
-          break; // don't burn quota paging into an endpoint that just rejected us
-        }
+        status = res.status;
       } catch (err) {
         calls++;
         errors.push(`"${query}" s.${page}: ${err.message}`);
         break;
       }
 
-      // Keep the first raw response so the SOAP shape can be verified from the
-      // Actions artifact instead of guessed at.
+      // Save the raw response BEFORE deciding whether it was a success. A rejected
+      // response is precisely the one worth looking at, and saving it only on the
+      // happy path means the failure you need to debug is the one you never see.
       if (probeDir && !firstRawSaved) {
         try {
           fs.mkdirSync(probeDir, { recursive: true });
@@ -106,10 +104,18 @@ async function fetchListings({ settings, credentials, probeDir }) {
         } catch (_) {}
       }
 
+      if (status < 200 || status >= 300) {
+        // Put enough in the message that the build log alone identifies the
+        // problem — no artifact download required.
+        errors.push(`"${query}" s.${page}: ${describe(raw, status)}`);
+        break; // don't burn quota paging into an endpoint that just rejected us
+      }
+
       const { items, totalPages } = parseSearchResponse(raw);
       if (!items.length) {
-        const fault = soapFault(raw);
-        if (fault) errors.push(`"${query}" s.${page}: SOAP fault: ${fault}`);
+        // A 200 with no items is either an empty result set (fine, stop paging) or
+        // our parse assumption being wrong (not fine). Say which.
+        if (page === 1) errors.push(`"${query}": ${describe(raw, status)}`);
         break;
       }
 
@@ -214,7 +220,28 @@ function deepFind(obj, pred, depth = 0) {
 
 function soapFault(xml) {
   const m = String(xml || '').match(/<faultstring[^>]*>([\s\S]*?)<\/faultstring>/i);
-  return m ? m[1].trim().slice(0, 200) : null;
+  return m ? m[1].trim().slice(0, 300) : null;
+}
+
+/**
+ * Turn a response we could not use into a message that explains itself.
+ *
+ * The three failures worth telling apart: a SOAP fault (our envelope or
+ * credentials are wrong), a non-XML body (wrong endpoint — usually an HTML error
+ * page), and well-formed XML we failed to find items in (our parse assumption is
+ * wrong). Guessing between those from "0 annoncer" wastes a CI round trip each time.
+ */
+function describe(raw, status) {
+  const body = String(raw || '');
+  const fault = soapFault(body);
+  if (fault) return `HTTP ${status} · SOAP fault: ${fault}`;
+
+  const snippet = body.replace(/\s+/g, ' ').trim().slice(0, 220);
+  if (!snippet) return `HTTP ${status} · tomt svar`;
+  if (!/^<\?xml|^<soap|^<[A-Za-z]/.test(snippet)) return `HTTP ${status} · ikke-XML svar: ${snippet}`;
+
+  const tags = [...new Set((body.match(/<([A-Za-z][\w.:-]*)/g) || []).map((t) => t.slice(1)))].slice(0, 14);
+  return `HTTP ${status} · XML uden genkendelige poster · tags: ${tags.join(', ') || 'ingen'} · start: ${snippet.slice(0, 120)}`;
 }
 
 function num(v) {
