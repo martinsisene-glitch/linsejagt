@@ -1,0 +1,321 @@
+{
+  "_readme": [
+    "Dette er den eneste fil du normalt skal redigere.",
+    "newPriceDKK  = hvad objektivet koster NYT i Danmark lige nu (bruges til '% under nypris').",
+    "usedBaselineDKK = normal brugtpris — bruges til at se om en annonce er billig FOR brugtmarkedet.",
+    "priceVerified = sæt til true når du selv har tjekket nyprisen hos en forhandler. Alt med false",
+    "                vises som 'estimat' i sidens footer, så du ved hvad du kan stole på.",
+    "codes  = Sonys modelkoder. Det er den sikreste måde at genkende et objektiv på.",
+    "match  = løsere regex-mønstre (køres mod en normaliseret titel: 'f/1,8' bliver '1.8', '50 mm' bliver '50mm').",
+    "exclude = regex der DISKVALIFICERER en annonce for netop dette objektiv (fx forveksling med GM-udgaven).",
+    "watch  = true betyder 'giv mig besked' — driver RSS-feed og 'nyt siden sidst'.",
+    "Tip: kør 'npm run explain' for at se præcis hvorfor en annonce blev matchet eller afvist."
+  ],
+
+  "settings": {
+    "shippingDKK": { "tradera": 120, "dba": 50 },
+    "fallbackSekToDkk": 0.64,
+    "greatDealThreshold": 0.5,
+    "goodDealThreshold": 0.3,
+    "feedDays": 14,
+    "newBadgeHours": 48,
+
+    "_querynote": [
+      "Brede søgninger frem for én pr. objektiv: Traderas API-kvote er ikke veldokumenteret,",
+      "og 24 objektiver x 12 kørsler i døgnet ville være et unødigt gamble. Brede søgninger",
+      "koster et fast antal kald uanset hvor stort kataloget bliver — filtreringen sker lokalt.",
+      "Hold øje med 'kald' i build-loggen de første dage."
+    ],
+    "tradera": {
+      "categoryId": 0,
+      "pagesPerQuery": 2,
+      "queries": [
+        "sony fe objektiv",
+        "sony e-mount objektiv",
+        "sony sel objektiv",
+        "sony fe gm",
+        "sony objektiv prime",
+        "sony fe zoom objektiv",
+        "sony e objektiv aps-c",
+        "sony alpha objektiv"
+      ]
+    },
+    "dba": {
+      "pagesPerQuery": 2,
+      "queries": [
+        "sony fe objektiv",
+        "sony e-mount objektiv",
+        "sony sel objektiv",
+        "sony gm objektiv",
+        "sony objektiv"
+      ]
+    }
+  },
+
+  "lenses": [
+    {
+      "id": "fe-50-1.8",
+      "name": "Sony FE 50mm f/1.8",
+      "codes": ["SEL50F18F"],
+      "newPriceDKK": 1699,
+      "usedBaselineDKK": 950,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["fe\\s*50mm.*1\\.8", "50mm.*1\\.8.*fe", "sony.*50mm.*1\\.8"],
+      "exclude": ["1\\.4", "1\\.2", "\\bgm\\b", "zeiss", "sonnar", "\\b55mm\\b", "a-mount", "minolta", "\\bf2\\.5\\b", "macro"]
+    },
+    {
+      "id": "fe-85-1.8",
+      "name": "Sony FE 85mm f/1.8",
+      "codes": ["SEL85F18"],
+      "newPriceDKK": 4199,
+      "usedBaselineDKK": 2600,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["fe\\s*85mm.*1\\.8", "85mm.*1\\.8.*fe", "sony.*85mm.*1\\.8"],
+      "exclude": ["1\\.4", "\\bgm\\b", "batis", "samyang", "viltrox", "sigma", "tamron", "a-mount", "minolta"]
+    },
+    {
+      "id": "fe-35-1.8",
+      "name": "Sony FE 35mm f/1.8",
+      "codes": ["SEL35F18F"],
+      "newPriceDKK": 5199,
+      "usedBaselineDKK": 3300,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["fe\\s*35mm.*1\\.8", "35mm.*1\\.8.*\\bfe\\b"],
+      "exclude": ["1\\.4", "\\bgm\\b", "\\boss\\b", "aps-?c", "\\bdt\\b", "samyang", "viltrox", "sigma", "tamron", "a-mount"]
+    },
+    {
+      "id": "fe-55-1.8-za",
+      "name": "Sony Zeiss Sonnar T* FE 55mm f/1.8 ZA",
+      "codes": ["SEL55F18Z"],
+      "newPriceDKK": 6999,
+      "usedBaselineDKK": 3800,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["55mm.*1\\.8", "sonnar.*55", "zeiss.*55mm"],
+      "exclude": ["55-210", "55-200", "18-55", "16-55", "\\b50mm\\b", "a-mount", "minolta"]
+    },
+    {
+      "id": "fe-40-2.5g",
+      "name": "Sony FE 40mm f/2.5 G",
+      "codes": ["SEL40F25G"],
+      "newPriceDKK": 4699,
+      "usedBaselineDKK": 3100,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["40mm.*2\\.5"],
+      "exclude": ["a-mount", "minolta", "voigtl"]
+    },
+    {
+      "id": "fe-24-2.8g",
+      "name": "Sony FE 24mm f/2.8 G",
+      "codes": ["SEL24F28G"],
+      "newPriceDKK": 4699,
+      "usedBaselineDKK": 3100,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["24mm.*2\\.8"],
+      "exclude": ["24-70", "24-105", "24-240", "1\\.4", "\\bgm\\b", "a-mount", "minolta", "samyang", "sigma"]
+    },
+    {
+      "id": "fe-20-1.8g",
+      "name": "Sony FE 20mm f/1.8 G",
+      "codes": ["SEL20F18G"],
+      "newPriceDKK": 7499,
+      "usedBaselineDKK": 5000,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["20mm.*1\\.8"],
+      "exclude": ["a-mount", "sigma", "tokina", "20-70"]
+    },
+    {
+      "id": "fe-90-2.8-macro",
+      "name": "Sony FE 90mm f/2.8 Macro G OSS",
+      "codes": ["SEL90M28G"],
+      "newPriceDKK": 8499,
+      "usedBaselineDKK": 5300,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["90mm.*2\\.8", "90mm.*macro"],
+      "exclude": ["a-mount", "minolta", "tamron", "sigma"]
+    },
+    {
+      "id": "fe-50-1.4gm",
+      "name": "Sony FE 50mm f/1.4 GM",
+      "codes": ["SEL50F14GM"],
+      "newPriceDKK": 10999,
+      "usedBaselineDKK": 7800,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["50mm.*1\\.4.*\\bgm\\b", "\\bgm\\b.*50mm.*1\\.4"],
+      "exclude": ["\\bza\\b", "planar", "a-mount", "sigma", "samyang", "1\\.2"]
+    },
+    {
+      "id": "fe-35-1.4gm",
+      "name": "Sony FE 35mm f/1.4 GM",
+      "codes": ["SEL35F14GM"],
+      "newPriceDKK": 10999,
+      "usedBaselineDKK": 7800,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["35mm.*1\\.4.*\\bgm\\b", "\\bgm\\b.*35mm.*1\\.4"],
+      "exclude": ["\\bza\\b", "distagon", "a-mount", "sigma", "samyang", "viltrox"]
+    },
+    {
+      "id": "fe-24-1.4gm",
+      "name": "Sony FE 24mm f/1.4 GM",
+      "codes": ["SEL24F14GM"],
+      "newPriceDKK": 10999,
+      "usedBaselineDKK": 7500,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["24mm.*1\\.4.*\\bgm\\b", "\\bgm\\b.*24mm.*1\\.4"],
+      "exclude": ["24-70", "24-105", "sigma", "samyang", "a-mount"]
+    },
+    {
+      "id": "fe-85-1.4gm2",
+      "name": "Sony FE 85mm f/1.4 GM II",
+      "codes": ["SEL85F14GM2"],
+      "newPriceDKK": 13499,
+      "usedBaselineDKK": 10500,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["85mm.*1\\.4.*gm(\\s*oss)?\\s*(ii|2)\\b", "gm(\\s*oss)?\\s*(ii|2)\\b.*85mm.*1\\.4"],
+      "exclude": ["sigma", "samyang", "viltrox", "a-mount", "batis"]
+    },
+    {
+      "id": "fe-85-1.4gm",
+      "name": "Sony FE 85mm f/1.4 GM",
+      "codes": ["SEL85F14GM"],
+      "newPriceDKK": 12499,
+      "usedBaselineDKK": 7500,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["85mm.*1\\.4.*\\bgm\\b", "\\bgm\\b.*85mm.*1\\.4"],
+      "exclude": ["gm(\\s*oss)?\\s*(ii|2)\\b", "gmii", "sigma", "samyang", "viltrox", "a-mount", "batis"]
+    },
+    {
+      "id": "fe-24-70-2.8gm2",
+      "name": "Sony FE 24-70mm f/2.8 GM II",
+      "codes": ["SEL2470GM2"],
+      "newPriceDKK": 17499,
+      "usedBaselineDKK": 13500,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["24-70mm.*2\\.8.*gm(\\s*oss)?\\s*(ii|2)\\b", "gm(\\s*oss)?\\s*(ii|2)\\b.*24-70"],
+      "exclude": ["tamron", "sigma", "a-mount", "\\bf4\\b"]
+    },
+    {
+      "id": "fe-24-70-2.8gm",
+      "name": "Sony FE 24-70mm f/2.8 GM",
+      "codes": ["SEL2470GM"],
+      "newPriceDKK": 15999,
+      "usedBaselineDKK": 8500,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["24-70mm.*2\\.8.*\\bgm\\b", "\\bgm\\b.*24-70mm.*2\\.8"],
+      "exclude": ["gm(\\s*oss)?\\s*(ii|2)\\b", "gmii", "tamron", "sigma", "a-mount", "\\bza\\b", "vario-tessar"]
+    },
+    {
+      "id": "fe-16-35-2.8gm2",
+      "name": "Sony FE 16-35mm f/2.8 GM II",
+      "codes": ["SEL1635GM2"],
+      "newPriceDKK": 16999,
+      "usedBaselineDKK": 13000,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["16-35mm.*2\\.8.*gm(\\s*oss)?\\s*(ii|2)\\b"],
+      "exclude": ["tamron", "sigma", "\\bf4\\b", "\\bza\\b"]
+    },
+    {
+      "id": "fe-70-200-2.8gm2",
+      "name": "Sony FE 70-200mm f/2.8 GM OSS II",
+      "codes": ["SEL70200GM2"],
+      "newPriceDKK": 19999,
+      "usedBaselineDKK": 15500,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["70-200mm.*2\\.8.*gm(\\s*oss)?\\s*(ii|2)\\b"],
+      "exclude": ["\\bf4\\b", "tamron", "sigma", "a-mount"]
+    },
+    {
+      "id": "fe-24-105-4g",
+      "name": "Sony FE 24-105mm f/4 G OSS",
+      "codes": ["SEL24105G"],
+      "newPriceDKK": 9499,
+      "usedBaselineDKK": 5800,
+      "priceVerified": false,
+      "watch": true,
+      "match": ["24-105mm"],
+      "exclude": ["a-mount", "canon", "sigma"]
+    },
+    {
+      "id": "fe-70-200-4g",
+      "name": "Sony FE 70-200mm f/4 G OSS",
+      "codes": ["SEL70200G"],
+      "newPriceDKK": 10999,
+      "usedBaselineDKK": 5500,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["70-200mm.*\\bf?4\\b"],
+      "exclude": ["2\\.8", "\\bgm\\b", "macro", "a-mount", "tamron", "sigma"]
+    },
+    {
+      "id": "fe-28-70-kit",
+      "name": "Sony FE 28-70mm f/3.5-5.6 OSS (kit)",
+      "codes": ["SEL2870"],
+      "newPriceDKK": 2199,
+      "usedBaselineDKK": 900,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["28-70mm"],
+      "exclude": ["2\\.8", "\\bgm\\b", "tamron", "sigma", "a-mount"]
+    },
+    {
+      "id": "e-35-1.8-oss",
+      "name": "Sony E 35mm f/1.8 OSS (APS-C)",
+      "codes": ["SEL35F18"],
+      "newPriceDKK": 3599,
+      "usedBaselineDKK": 2000,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["\\be\\s*35mm.*1\\.8.*oss", "35mm.*1\\.8.*oss"],
+      "exclude": ["\\bfe\\b", "\\bgm\\b", "1\\.4", "sigma", "viltrox", "samyang"]
+    },
+    {
+      "id": "e-16-55-2.8g",
+      "name": "Sony E 16-55mm f/2.8 G (APS-C)",
+      "codes": ["SEL1655G"],
+      "newPriceDKK": 8999,
+      "usedBaselineDKK": 5500,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["16-55mm.*2\\.8"],
+      "exclude": ["sigma", "tamron", "18-55"]
+    },
+    {
+      "id": "e-10-18-4-oss",
+      "name": "Sony E 10-18mm f/4 OSS (APS-C)",
+      "codes": ["SEL1018"],
+      "newPriceDKK": 5999,
+      "usedBaselineDKK": 3200,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["10-18mm"],
+      "exclude": ["sigma", "tamron", "canon", "10-20"]
+    },
+    {
+      "id": "e-55-210",
+      "name": "Sony E 55-210mm f/4.5-6.3 OSS (APS-C)",
+      "codes": ["SEL55210"],
+      "newPriceDKK": 2299,
+      "usedBaselineDKK": 800,
+      "priceVerified": false,
+      "watch": false,
+      "match": ["55-210mm"],
+      "exclude": ["a-mount"]
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "_note": [
+    "Håndskrevne test-annoncer i DKK (DBA har ingen auktioner — alt er fastpris).",
+    "Indeholder bevidst støj: købsannoncer, tilbehør, tom æske, forkert bajonet.",
+    "Erstattes senere af rigtige svar hentet i GitHub Actions (fixtures/raw-dba.json)."
+  ],
+  "listings": [
+    {
+      "id": "d-2001",
+      "title": "Sony FE 85mm f/1.8 - næsten ubrugt, med æske og kvittering",
+      "url": "https://www.dba.dk/sony-fe-85mm/id-2001/",
+      "priceDKK": 2450,
+      "isBuyNow": true,
+      "sellerLocation": "Aarhus"
+    },
+    {
+      "id": "d-2002",
+      "title": "Sony FE 50mm 1,8 objektiv - fejler intet",
+      "url": "https://www.dba.dk/sony-fe-50mm/id-2002/",
+      "priceDKK": 800,
+      "isBuyNow": true,
+      "sellerLocation": "København S"
+    },
+    {
+      "id": "d-2003",
+      "title": "Søger Sony FE 35mm f/1.8 - kontant afregning",
+      "url": "https://www.dba.dk/soeger-sony/id-2003/",
+      "priceDKK": 3000,
+      "isBuyNow": true,
+      "sellerLocation": "Odense"
+    },
+    {
+      "id": "d-2004",
+      "title": "Sony FE 35mm f/1.8 SEL35F18F - perfekt stand",
+      "url": "https://www.dba.dk/sony-fe-35mm/id-2004/",
+      "priceDKK": 3100,
+      "isBuyNow": true,
+      "sellerLocation": "Aalborg"
+    },
+    {
+      "id": "d-2005",
+      "title": "Objektivdæksel til Sony 50mm - 2 stk",
+      "url": "https://www.dba.dk/daeksel/id-2005/",
+      "priceDKK": 40,
+      "isBuyNow": true,
+      "sellerLocation": "Vejle"
+    },
+    {
+      "id": "d-2006",
+      "title": "Tom æske til Sony FE 85mm GM - kun æske, intet objektiv",
+      "url": "https://www.dba.dk/tom-aeske/id-2006/",
+      "priceDKK": 100,
+      "isBuyNow": true,
+      "sellerLocation": "Esbjerg"
+    },
+    {
+      "id": "d-2007",
+      "title": "Sony FE 85mm f/1.4 GM SEL85F14GM - fantastisk portrætobjektiv",
+      "url": "https://www.dba.dk/sony-85gm/id-2007/",
+      "priceDKK": 6900,
+      "isBuyNow": true,
+      "sellerLocation": "Roskilde"
+    },
+    {
+      "id": "d-2008",
+      "title": "Sony DT 50mm f/1.8 SAM til A-mount",
+      "url": "https://www.dba.dk/sony-dt-50/id-2008/",
+      "priceDKK": 550,
+      "isBuyNow": true,
+      "sellerLocation": "Randers"
+    },
+    {
+      "id": "d-2009",
+      "title": "Sony Zeiss 55mm f/1.8 ZA SEL55F18Z - lidt støv indvendigt, ingen betydning",
+      "url": "https://www.dba.dk/zeiss-55/id-2009/",
+      "priceDKK": 3400,
+      "isBuyNow": true,
+      "sellerLocation": "Horsens"
+    },
+    {
+      "id": "d-2010",
+      "title": "Sony E 16-55mm f/2.8 G SEL1655G til APS-C",
+      "url": "https://www.dba.dk/sony-1655g/id-2010/",
+      "priceDKK": 4900,
+      "isBuyNow": true,
+      "shippingDKK": 65,
+      "sellerLocation": "Silkeborg"
+    },
+    {
+      "id": "d-2011",
+      "title": "UV-filter 55mm til Sony FE 50mm f/1.8",
+      "url": "https://www.dba.dk/uv-filter/id-2011/",
+      "priceDKK": 75,
+      "isBuyNow": true,
+      "sellerLocation": "Kolding"
+    },
+    {
+      "id": "d-2012",
+      "title": "Sony FE 24mm f/2.8 G SEL24F28G - kompakt og skarp",
+      "url": "https://www.dba.dk/sony-24g/id-2012/",
+      "priceDKK": 3300,
+      "isBuyNow": true,
+      "sellerLocation": "Herning"
+    },
+    {
+      "id": "d-2013",
+      "title": "Sony FE 70-200mm f/4 G OSS SEL70200G",
+      "url": "https://www.dba.dk/sony-70200g/id-2013/",
+      "priceDKK": 4800,
+      "isBuyNow": true,
+      "sellerLocation": "Frederiksberg"
+    },
+    {
+      "id": "d-2014",
+      "title": "Canon EF 50mm f/1.8 STM med Sony E adapter",
+      "url": "https://www.dba.dk/canon-50/id-2014/",
+      "priceDKK": 700,
+      "isBuyNow": true,
+      "sellerLocation": "Hillerød"
+    },
+    {
+      "id": "d-2015",
+      "title": "Sony FE 20mm f/1.8 G SEL20F18G - vidvinkel, som ny",
+      "url": "https://www.dba.dk/sony-20g/id-2015/",
+      "priceDKK": 4700,
+      "isBuyNow": true,
+      "sellerLocation": "Næstved"
+    }
+  ]
+}

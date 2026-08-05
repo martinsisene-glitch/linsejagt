@@ -1,0 +1,170 @@
+{
+  "_note": [
+    "Håndskrevne test-annoncer i det normaliserede format, brugt af `npm run offline`.",
+    "Halvdelen er BEVIDST skrald: objektivdæksler, købsannoncer, svamp, A-mount, pakker.",
+    "Hvis noget af det skrald dukker op på siden som en 'deal', er der en fejl i filtrene.",
+    "`endsInHours` regnes om til en rigtig sluttid når fixturen indlæses.",
+    "Erstattes senere af rigtige API-svar hentet i GitHub Actions (fixtures/raw-tradera.xml)."
+  ],
+  "listings": [
+    {
+      "id": "t-1001",
+      "title": "Sony FE 50mm f/1.8 SEL50F18F - mycket fint skick",
+      "url": "https://www.tradera.com/item/302300/1001/sony-fe-50mm",
+      "priceSEK": 900,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Stockholm"
+    },
+    {
+      "id": "t-1002",
+      "title": "Sony Zeiss Sonnar T* FE 55mm f/1,8 ZA",
+      "url": "https://www.tradera.com/item/302300/1002/sony-55mm",
+      "priceSEK": 1,
+      "isBuyNow": false,
+      "bidCount": 0,
+      "endsInHours": 71,
+      "sellerLocation": "Göteborg"
+    },
+    {
+      "id": "t-1003",
+      "title": "Sony FE 85mm 1.8 - budgivning slutar snart!",
+      "url": "https://www.tradera.com/item/302300/1003/sony-85mm",
+      "priceSEK": 2400,
+      "isBuyNow": false,
+      "bidCount": 11,
+      "endsInHours": 6,
+      "sellerLocation": "Malmö"
+    },
+    {
+      "id": "t-1004",
+      "title": "Objektivlock till Sony FE 24-70mm f/2.8 GM II - nytt",
+      "url": "https://www.tradera.com/item/302300/1004/lock",
+      "priceSEK": 79,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Uppsala"
+    },
+    {
+      "id": "t-1005",
+      "title": "Motljusskydd / lens hood för Sony 70-200mm f/2.8 GM II",
+      "url": "https://www.tradera.com/item/302300/1005/hood",
+      "priceSEK": 150,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Lund"
+    },
+    {
+      "id": "t-1006",
+      "title": "Sony FE 24-70mm f/2.8 GM II SEL2470GM2 - som ny, kvitto finns",
+      "url": "https://www.tradera.com/item/302300/1006/2470gm2",
+      "priceSEK": 15900,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Stockholm"
+    },
+    {
+      "id": "t-1007",
+      "title": "Sony FE 24-70mm f/2.8 GM (första versionen) SEL2470GM",
+      "url": "https://www.tradera.com/item/302300/1007/2470gm",
+      "priceSEK": 8900,
+      "isBuyNow": false,
+      "bidCount": 4,
+      "endsInHours": 40,
+      "sellerLocation": "Örebro"
+    },
+    {
+      "id": "t-1008",
+      "title": "Sony 50mm f/1.8 med SVAMP i linsen - säljes för delar",
+      "url": "https://www.tradera.com/item/302300/1008/svamp",
+      "priceSEK": 200,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Kiruna"
+    },
+    {
+      "id": "t-1009",
+      "title": "Minolta AF 50mm f/1.7 A-mount till Sony Alpha",
+      "url": "https://www.tradera.com/item/302300/1009/minolta",
+      "priceSEK": 450,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Borås"
+    },
+    {
+      "id": "t-1010",
+      "title": "Sony A7 III kamerahus + FE 28-70mm OSS kit - komplett paket",
+      "url": "https://www.tradera.com/item/302300/1010/a7iii-kit",
+      "priceSEK": 11500,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Stockholm"
+    },
+    {
+      "id": "t-1011",
+      "title": "Yongnuo 50mm f/1.8 autofokus objektiv",
+      "url": "https://www.tradera.com/item/302300/1011/yongnuo",
+      "priceSEK": 400,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Sundsvall"
+    },
+    {
+      "id": "t-1012",
+      "title": "Sony FE 90mm f/2.8 Macro G OSS SEL90M28G - lite repor på tuben",
+      "url": "https://www.tradera.com/item/302300/1012/90macro",
+      "priceSEK": 6200,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Helsingborg"
+    },
+    {
+      "id": "t-1013",
+      "title": "Sony FE 20mm f/1.8 G - auktion utan reservationspris",
+      "url": "https://www.tradera.com/item/302300/1013/20g",
+      "priceSEK": 3100,
+      "isBuyNow": false,
+      "bidCount": 8,
+      "endsInHours": 18,
+      "sellerLocation": "Växjö"
+    },
+    {
+      "id": "t-1014",
+      "title": "Sony FE 50mm f/1.4 GM SEL50F14GM - helt ny i kartong",
+      "url": "https://www.tradera.com/item/302300/1014/50gm",
+      "priceSEK": 18000,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Stockholm"
+    },
+    {
+      "id": "t-1015",
+      "title": "Sony E 55-210mm f/4.5-6.3 OSS SEL55210 svart",
+      "url": "https://www.tradera.com/item/302300/1015/55210",
+      "priceSEK": 700,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "shippingSEK": 79,
+      "sellerLocation": "Umeå"
+    },
+    {
+      "id": "t-1016",
+      "title": "Sökes: Sony FE 35mm f/1.8 - betalar bra för fint exemplar",
+      "url": "https://www.tradera.com/item/302300/1016/sokes",
+      "priceSEK": 3000,
+      "isBuyNow": true,
+      "bidCount": 0,
+      "sellerLocation": "Stockholm"
+    },
+    {
+      "id": "t-1017",
+      "title": "Sony FE 24-105mm f/4 G OSS SEL24105G - välanvänd men fungerar perfekt",
+      "url": "https://www.tradera.com/item/302300/1017/24105",
+      "priceSEK": 5400,
+      "isBuyNow": false,
+      "bidCount": 2,
+      "endsInHours": 92,
+      "sellerLocation": "Karlstad"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "linsejagt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Overblik over brugte Sony E-mount objektiver på Tradera og DBA, sammenlignet med nypris",
+  "type": "commonjs",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "offline": "node scripts/build.js --fixtures",
+    "explain": "node scripts/build.js --fixtures --explain",
+    "serve": "node scripts/serve.js",
+    "probe": "node scripts/build.js --probe",
+    "test": "node scripts/selftest.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "//deps": "Ingen. Bevidst: projektet skal kunne bygge med bare `node`, uden `npm install` — både i CI og på en maskine bag en firewall der blokerer npm-registret."
+}

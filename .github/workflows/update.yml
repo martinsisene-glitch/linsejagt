@@ -1,0 +1,116 @@
+name: Opdater og udgiv
+
+on:
+  schedule:
+    # Hver anden time. Bevidst ikke på hel time: alverdens cron-jobs fyrer :00, og
+    # Tradera og DBA har ingen grund til at få vores trafik i netop det spike.
+    - cron: '17 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      probe:
+        description: 'Gem rå svar fra kilderne som artifact (til fejlsøgning)'
+        type: boolean
+        default: false
+
+# Kun én kørsel ad gangen — to samtidige builds ville skændes om state.json.
+concurrency:
+  group: linsejagt
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      uploaded: ${{ steps.upload.conclusion }}
+      sources_ok: ${{ steps.build.outputs.exit }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Bemærk: intet `npm ci`. Projektet har bevidst nul dependencies.
+
+      - name: Selvtest
+        run: npm test
+
+      - name: Byg site
+        id: build
+        env:
+          TRADERA_APP_ID: ${{ secrets.TRADERA_APP_ID }}
+          TRADERA_APP_KEY: ${{ secrets.TRADERA_APP_KEY }}
+        # continue-on-error, så en død kilde stadig giver en udgivet (delvis) side.
+        # Selve fejlen rejses til sidst, efter siden er uploadet.
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node scripts/build.js ${{ inputs.probe && '--probe' || '' }} 2>&1 | tee build.log
+          echo "exit=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: Opsummering
+        if: always()
+        run: |
+          {
+            echo '## Linsejagt'
+            echo '```'
+            cat build.log || echo '(ingen build-log — bygget fejlede tidligt)'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Gem rå svar fra kilderne
+        if: inputs.probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: raw-source-responses
+          path: |
+            fixtures/raw-tradera.xml
+            fixtures/raw-dba.html
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Gem state.json
+        run: |
+          git config user.name  'linsejagt-bot'
+          git config user.email 'actions@github.com'
+          git add data/state.json
+          # Ingen ændringer er helt normalt — så er der ikke kommet nye annoncer.
+          if git diff --quiet --cached; then
+            echo 'state.json uændret'
+          else
+            git commit -m 'state: opdater set-tidspunkter [skip ci]'
+            # Rebase før push: en manuel commit imellem to kørsler må ikke
+            # koste os "first seen"-historikken.
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - id: upload
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Fejl hvis en kilde ikke leverede
+        if: steps.build.outputs.exit != '0'
+        run: |
+          echo "::error::Mindst én kilde leverede ingen brugbare annoncer — siden er ufuldstændig. Se opsummeringen ovenfor."
+          exit 1
+
+  deploy:
+    needs: build
+    # Udgiv også når en kilde fejlede: et delvist overblik slår ingenting, og
+    # siden viser selv en advarsel om hullet. Men kun hvis der ER en artifact.
+    if: always() && needs.build.outputs.uploaded == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

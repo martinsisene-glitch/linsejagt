@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Hand-written stand-in for a Tradera SearchService.Search response, built from the
+  field names documented at api.tradera.com/v3/searchservice.asmx?op=Search.
+
+  This exists because the SOAP response shape is the one part of the project that
+  cannot be verified from a machine without network access to api.tradera.com. The
+  self-test parses this file to prove scripts/xml.js and the Tradera normalizer
+  agree on the documented shape.
+
+  Replace it with a REAL captured response as soon as one is available:
+      node scripts/build.js --probe --only=tradera
+  which writes fixtures/raw-tradera.xml. Then re-run `npm test` — if the real shape
+  differs from this guess, the test is where you will find out.
+-->
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <SearchResponse xmlns="http://api.tradera.com">
+      <SearchResult>
+        <TotalNumberOfItems>3</TotalNumberOfItems>
+        <TotalNumberOfPages>1</TotalNumberOfPages>
+        <Items>
+          <SearchItem>
+            <Id>612345678</Id>
+            <ShortDescription>Sony FE 85mm f/1.8 SEL85F18 - mycket fint skick</ShortDescription>
+            <BuyItNowPrice>3200</BuyItNowPrice>
+            <MaxBid xsi:nil="true" />
+            <NextBid xsi:nil="true" />
+            <BidCount>0</BidCount>
+            <HasBids>false</HasBids>
+            <IsEnded>false</IsEnded>
+            <ItemType>FixedPrice</ItemType>
+            <EndDate>2026-08-20T19:30:00</EndDate>
+            <ItemUrl>/item/302300/612345678/sony-fe-85mm-f-1-8</ItemUrl>
+            <ThumbnailLink>//img.tradera.net/images/612/612345678_thumb.jpg</ThumbnailLink>
+            <SellerAlias>fotoprylar_se</SellerAlias>
+            <SellerId>4455667</SellerId>
+            <CategoryId>302300</CategoryId>
+            <ImageLinks>
+              <string>//img.tradera.net/images/612/612345678_1.jpg</string>
+              <string>//img.tradera.net/images/612/612345678_2.jpg</string>
+            </ImageLinks>
+          </SearchItem>
+          <SearchItem>
+            <Id>612345679</Id>
+            <ShortDescription>Sony Zeiss Sonnar T* FE 55mm f/1,8 ZA SEL55F18Z</ShortDescription>
+            <BuyItNowPrice xsi:nil="true" />
+            <MaxBid>2750</MaxBid>
+            <NextBid>2800</NextBid>
+            <BidCount>9</BidCount>
+            <HasBids>true</HasBids>
+            <IsEnded>false</IsEnded>
+            <ItemType>Auction</ItemType>
+            <EndDate>2026-08-08T20:00:00</EndDate>
+            <ItemUrl>/item/302300/612345679/sony-zeiss-55mm</ItemUrl>
+            <ThumbnailLink>//img.tradera.net/images/612/612345679_thumb.jpg</ThumbnailLink>
+            <SellerAlias>kamerahandlaren</SellerAlias>
+            <CategoryId>302300</CategoryId>
+          </SearchItem>
+          <SearchItem>
+            <Id>612345680</Id>
+            <ShortDescription>Sony FE 24-70mm f/2.8 GM II - AVSLUTAD</ShortDescription>
+            <BuyItNowPrice>15900</BuyItNowPrice>
+            <BidCount>0</BidCount>
+            <HasBids>false</HasBids>
+            <IsEnded>true</IsEnded>
+            <ItemType>FixedPrice</ItemType>
+            <EndDate>2026-07-01T12:00:00</EndDate>
+            <ItemUrl>/item/302300/612345680/sony-2470gm2</ItemUrl>
+            <CategoryId>302300</CategoryId>
+          </SearchItem>
+        </Items>
+      </SearchResult>
+    </SearchResponse>
+  </soap:Body>
+</soap:Envelope>

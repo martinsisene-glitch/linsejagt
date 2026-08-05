@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linsejagt — brugte Sony E-mount objektiver</title>
+<meta name="description" content="Overblik over brugte Sony E-mount objektiver til salg på Tradera og DBA, sammenlignet med nypris.">
+<meta name="color-scheme" content="light dark">
+<link rel="alternate" type="application/rss+xml" title="Linsejagt — nye annoncer" href="feed.xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Linsejagt</h1>
+    <p class="tagline">Brugte Sony E-mount objektiver på Tradera og DBA — hvor meget billigere end nyt?</p>
+    <p class="meta" id="meta">Indlæser…</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div id="newBanner" class="banner" hidden></div>
+  <div id="sourceWarning" class="banner warn" hidden></div>
+
+  <section class="controls" aria-label="Filtre">
+    <label class="ctl">
+      <span>Sortér</span>
+      <select id="sort">
+        <option value="deal">Bedste rabat</option>
+        <option value="ending">Slutter først</option>
+        <option value="new">Nyest annonce</option>
+        <option value="price">Laveste pris</option>
+        <option value="lens">Objektiv (A–Å)</option>
+      </select>
+    </label>
+
+    <div class="chips" role="group" aria-label="Kilde og type">
+      <button class="chip" data-filter="watch" type="button">Kun overvågede</button>
+      <button class="chip" data-filter="tradera" type="button">Tradera</button>
+      <button class="chip" data-filter="dba" type="button">DBA</button>
+      <button class="chip" data-filter="buynow" type="button">Køb nu</button>
+      <button class="chip" data-filter="auction" type="button">Auktion</button>
+    </div>
+
+    <label class="ctl">
+      <span>Min. rabat <b id="minOut">0%</b></span>
+      <input type="range" id="min" min="0" max="80" step="5" value="0">
+    </label>
+  </section>
+
+  <p class="count" id="count"></p>
+  <div id="list" class="list"></div>
+  <p class="empty" id="empty" hidden>Ingen annoncer matcher filtrene lige nu.</p>
+
+</main>
+
+<footer class="wrap foot">
+  <p id="health"></p>
+  <p>
+    <a href="feed.xml">RSS-feed</a> for overvågede objektiver ·
+    <a href="data.json">rå data</a> ·
+    <a href="https://github.com/martinsisene-glitch/linsejagt">kilde på GitHub</a>
+  </p>
+  <p class="fine">Priser hentes automatisk og kan være forældede. Tjek altid annoncen før du handler.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
