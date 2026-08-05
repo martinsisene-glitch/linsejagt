@@ -55,6 +55,10 @@ async function fetchListings({ settings, credentials, probeDir }) {
   const categoryId = cfg.categoryId ?? 0;
 
   if (!credentials.appId || !credentials.appKey) {
+    // Say WHICH one is missing and whether it arrived empty rather than absent —
+    // "one of two secrets is misnamed" and "neither secret is reaching the job"
+    // look identical otherwise, and they have different fixes. Lengths only; the
+    // key itself must never reach a log.
     return {
       listings: [],
       report: {
@@ -62,7 +66,11 @@ async function fetchListings({ settings, credentials, probeDir }) {
         fetched: 0,
         kept: 0,
         calls: 0,
-        error: 'TRADERA_APP_ID/TRADERA_APP_KEY mangler — registrér på api.tradera.com og læg dem i GitHub secrets',
+        error:
+          `TRADERA_APP_ID: ${describeSecret(credentials.appId)}, ` +
+          `TRADERA_APP_KEY: ${describeSecret(credentials.appKey)}. ` +
+          'Tjek Settings → Secrets and variables → Actions → fanen "Secrets" → "Repository secrets". ' +
+          'Ligger de under "Variables" eller under et Environment, kan bygge-jobbet ikke se dem.',
       },
     };
   }
@@ -216,6 +224,13 @@ function deepFind(obj, pred, depth = 0) {
     if (hit) return hit;
   }
   return null;
+}
+
+/** Presence and length of a secret — never its value. */
+function describeSecret(v) {
+  if (v == null) return 'mangler helt (findes ikke som secret)';
+  if (String(v).trim() === '') return 'sat men tom';
+  return `sat (${String(v).trim().length} tegn)`;
 }
 
 function soapFault(xml) {

@@ -179,7 +179,12 @@ async function fetchSource(name, catalog) {
   try {
     return await SOURCES[name].fetchListings({
       settings: catalog.settings,
-      credentials: { appId: process.env.TRADERA_APP_ID, appKey: process.env.TRADERA_APP_KEY },
+      // Trimmed: a secret pasted with a trailing newline would otherwise go into
+      // the SOAP header verbatim and fail auth for a reason nothing points at.
+      credentials: {
+        appId: (process.env.TRADERA_APP_ID || '').trim() || undefined,
+        appKey: (process.env.TRADERA_APP_KEY || '').trim() || undefined,
+      },
       probeDir: opts.probe ? FIXTURES : null,
     });
   } catch (err) {
