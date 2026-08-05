@@ -48,9 +48,14 @@ jobs:
         # Selve fejlen rejses til sidst, efter siden er uploadet.
         continue-on-error: true
         run: |
-          set -o pipefail
+          # IKKE `set -o pipefail` her. GitHub kører run-blokke med `bash -e`, så en
+          # fejlende pipeline ville afbryde steppet med det samme — og linjen der
+          # gemmer exit-koden ville aldrig køre. Uden pipefail er pipelinens status
+          # tee's (0), og vi læser nodes rigtige kode ud af PIPESTATUS.
           node scripts/build.js ${{ inputs.probe && '--probe' || '' }} 2>&1 | tee build.log
-          echo "exit=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          code=${PIPESTATUS[0]}
+          echo "exit=${code}" >> "$GITHUB_OUTPUT"
+          echo "build.js afsluttede med kode ${code}"
 
       - name: Opsummering
         if: always()
